@@ -25,6 +25,8 @@
     "mocha": "^1.21.4"
   },
   "dependencies": {
-    "objectdiff": "^1.1.0"
+    "lodash": "^2.4.1",
+    "objectdiff": "^1.1.0",
+    "shellwords": "^0.1.0"
   }
 }
