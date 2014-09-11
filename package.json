@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/phantasien/node-xcodeproj",
   "devDependencies": {
+    "jshint": "^2.5.5",
     "mocha": "^1.21.4"
   },
   "dependencies": {
