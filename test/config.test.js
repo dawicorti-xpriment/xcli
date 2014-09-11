@@ -1,16 +1,14 @@
 var assert = require('assert');
 var Config = require('../lib/config');
 
-
 describe('Config', function () {
   
-  var obj = {'OTHER_LDFLAGS': '-framework "Foundation"'}
+  var _obj = {'OTHER_LDFLAGS': '-framework "Foundation"'}
+  var _config = new Config(_obj);
 
 
-  it('can be created with obj', function () {
-    var config = new Config(obj);
-
-    assert.equal(true, config.equal(obj));
+  it('can be serialized with #toObj', function () {
+    assert.deepEqual(_config.toObj(), _obj);
   });
 
 });
