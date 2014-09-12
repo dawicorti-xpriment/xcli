@@ -27,7 +27,18 @@ describe('Config', function () {
     var config = new Config(obj);
 
     assert.deepEqual(config.frameworks(), ['Foundation']);
+    assert.deepEqual(config.weakFrameworks(), ['Twitter']);
+    assert.deepEqual(config.libraries(), ['xml2.2.7.3']);
+  });
 
+  it('can be serialized with toString', function () {
+    assert.equal(_config.toString(), 'OTHER_LDFLAGS = -framework "Foundation"');
+  });
+
+  it('sorts the internal data by setting name when serializing with toString', function () {
+    var config = new Config({Y: '2', Z: '3', X: '1'});
+
+    assert.equal(config.toString(), 'X = 1\nY = 2\nZ = 3');
   });
 
 });
