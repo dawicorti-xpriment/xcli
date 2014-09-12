@@ -23,7 +23,8 @@
   "homepage": "https://github.com/phantasien/node-xcodeproj",
   "devDependencies": {
     "jshint": "^2.5.5",
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "temporary": "0.0.8"
   },
   "dependencies": {
     "lodash": "^2.4.1",
