@@ -41,5 +41,10 @@ describe('Config', function () {
     assert.equal(config.toString(), 'X = 1\nY = 2\nZ = 3');
   });
 
+  it('can prefix values during serialization', function () {
+    var prefixHash = {'PODS_PREFIX_OTHER_LDFLAGS': _obj['OTHER_LDFLAGS']};
+    assert.deepEqual(_config.toObj('PODS_PREFIX_'), prefixHash);
+  });
+
 });
 
