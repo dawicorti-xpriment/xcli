@@ -1,5 +1,5 @@
 var assert = require('assert');
-var otherLinkerFlagsParser = require('../lib/otherlinkerflagsparser');
+var otherLinkerFlagsParser = require('../../lib/config/otherLinkerFlagsParser');
 
 describe('otherLinkerFlagsParser', function () {
 
