@@ -15,7 +15,7 @@ describe('Config', function () {
     return function (done) {
       _obj = {'OTHER_LDFLAGS': '-framework "Foundation"'}
       _config = new Config(_obj);
-      _fixturePath = __dirname + '/fixtures/oneline-key-value.xcconfig';      
+      _fixturePath = __dirname + '/fixtures';      
       test(done);
     }
   }
@@ -26,7 +26,10 @@ describe('Config', function () {
   }));
 
   it('can be created with file path', withContext(function (done) {
-    assert.deepEqual(_config.toObj(), new Config(_fixturePath).toObj());
+    assert.deepEqual(
+      _config.toObj(),
+      new Config(_fixturePath + '/oneline-key-value.xcconfig'
+    ).toObj());
     done();
   }));
 
@@ -111,6 +114,65 @@ describe('Config', function () {
       done();
     });
   }));
+
+  it('contains file path refs to all included xcconfigs', withContext(function (done) {
+    var config = new Config(_fixturePath + '/include.xcconfig');
+    assert.equal(config.includes.length, 1);
+    assert.equal(config.includes[0], 'Somefile');
+
+    done();
+  }));
+
+  it('can be created from multiline file', withContext(function (done) {
+    var config = new Config(_fixturePath + '/sample.xcconfig');
+    assert.deepEqual(config.toObj(), {
+      'Key1': 'Value1 Value2',
+      'Key2': 'Value3 Value4 Value5',
+      'Key3': 'Value6',
+      'Key4': ''
+    });
+
+    done();
+  }));
+
+  it('can be created from file with comments inside', withContext(function (done) {
+    var config = new Config(_fixturePath + '/with-comments.xcconfig');
+    assert.deepEqual(config.toObj(), {'Key': 'Value'});
+    done();
+  }));
+
+  it('doesn\'t duplicate other attribute values', withContext(function (done) {
+    var obj = {'CLANG_CXX_LIBRARY': 'libc++'};
+    var config = new Config(obj);
+
+    config.merge(obj);
+    
+    assert.deepEqual(config.toObj(), obj);
+    config.merge(obj);
+    assert.deepEqual(config.toObj(), obj);
+    done();
+  }));
+
+
+  it('preserves OTHER_LDFLAGS not related to libraries and frameworks', withContext(function (done) {
+    var config1 = new Config({'OTHER_LDFLAGS': '-ObjC -fobjc-arc'});
+    var config2 = new Config({'OTHER_LDFLAGS': '-framework SystemConfiguration'});
+    config1.merge(config2);
+    assert.deepEqual(config1.toObj()['OTHER_LDFLAGS'], '-ObjC -fobjc-arc -framework "SystemConfiguration"');
+    done();
+  }));
+
+  it('merges frameworks and libraries from another Config instance', withContext(function (done) {
+    var obj = {'OTHER_LDFLAGS': '-framework Foundation -weak_framework Twitter -lxml2.2.7.3'};
+    var config = new Config();
+
+    config.merge(new Config(obj));
+    assert.deepEqual(config.frameworks(), ['Foundation']); 
+    assert.deepEqual(config.weakFrameworks(), ['Twitter']); 
+    assert.deepEqual(config.libraries(), ['xml2.2.7.3']); 
+    done();
+  }));
+
 
 });
 
