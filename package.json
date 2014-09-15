@@ -27,6 +27,7 @@
     "temporary": "0.0.8"
   },
   "dependencies": {
+    "i": "^0.3.2",
     "lodash": "^2.4.1",
     "objectdiff": "^1.1.0",
     "shellwords": "^0.1.0"
