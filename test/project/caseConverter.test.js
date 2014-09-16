@@ -24,8 +24,6 @@ describe('caseConverter', function () {
     done();
   });
 
-  it('caches plist names to speed up the conversion');
-
   it('concerts a name to the Ruby symbol', function (done) {
     var result = caseConverter.convertToSnakeCase('ProjectRef')
     assert.equal(result, 'project_ref');

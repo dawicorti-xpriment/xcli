@@ -39,11 +39,17 @@ describe('AbstractObjectAttribute', function () {
 
     file.source_tree = 'A_ROOT';
     assert.equal(_attribute.getValue(file), 'A_ROOT');
-
     done();
   });
 
-  it('sets its value for a given object');
+  it('sets its value for a given object', function (done) {
+    var file = _project.new(PBXFileReference);
+
+    _attribute.setValue(file, 'A_ROOT');
+    assert.equal(file.source_tree, 'A_ROOT');
+    done();
+  });
+
   it('sets its default value for a given object');
   it('validates a simple value');
   it('validates an xcodeproj object ISA');
