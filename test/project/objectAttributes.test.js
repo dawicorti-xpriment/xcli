@@ -1,13 +1,17 @@
 var assert = require('assert');
 var AbstractObjectAttribute = require('../../lib/project/objectAttributes');
 var PBXFileReference = require('../../lib/project/object/fileReference');
+var Project = require('../../lib/project');
+
 
 describe('AbstractObjectAttribute', function () {
 
   var _attribute;
+  var _project;
 
   beforeEach(function () {
     _attribute = new AbstractObjectAttribute('simple', 'source_tree', PBXFileReference);
+    _project = new Project('/project_dir/Project.xcodeproj');
   });
 
   it('returns its type', function (done) {
@@ -31,39 +35,23 @@ describe('AbstractObjectAttribute', function () {
   });
 
   it('returns its value for a given object', function (done) {
-    throw 'not ready';
+    var file = _project.new(PBXFileReference);
+
+    file.source_tree = 'A_ROOT';
+    assert.equal(_attribute.getValue(file), 'A_ROOT');
+
+    done();
   });
 
-  it('sets its value for a given object', function (done) {
-    throw 'not ready';
-  });
-
-  it('sets its default value for a given object', function (done) {
-    throw 'not ready';
-  });
-
-  it('validates a simple value', function (done) {
-    throw 'not ready';
-  });
-
-  it('validates an xcodeproj object ISA', function (done) {
-    throw 'not ready';
-  });
+  it(' sets its value for a given object');
+  it(' sets its default value for a given object');
+  it(' validates a simple value');
+  it(' validates an xcodeproj object ISA');
 
   describe('references by keys attributes', function () {
-
-    it('validates the key of an attribute which stores', function (done) {
-      throw 'not ready';
-    });
-
-    it('validates the ISA of the value', function (done) {
-      throw 'not ready';
-    });
-
-    it('accepts a value', function (done) {
-      throw 'not ready';
-    });
-
+    it(' validates the key of an attribute which stores');
+    it(' validates the ISA of the value');
+    it(' accepts a value');
   });
 
 });
