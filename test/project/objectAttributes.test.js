@@ -43,15 +43,15 @@ describe('AbstractObjectAttribute', function () {
     done();
   });
 
-  it(' sets its value for a given object');
-  it(' sets its default value for a given object');
-  it(' validates a simple value');
-  it(' validates an xcodeproj object ISA');
+  it('sets its value for a given object');
+  it('sets its default value for a given object');
+  it('validates a simple value');
+  it('validates an xcodeproj object ISA');
 
   describe('references by keys attributes', function () {
-    it(' validates the key of an attribute which stores');
-    it(' validates the ISA of the value');
-    it(' accepts a value');
+    it('validates the key of an attribute which stores');
+    it('validates the ISA of the value');
+    it('accepts a value');
   });
 
 });
