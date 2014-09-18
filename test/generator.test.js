@@ -1,5 +1,6 @@
 var assert = require('assert');
 var generator = require('../lib/generator');
+var streamify = require('streamify');
 
 
 describe('generator', function () {
@@ -17,7 +18,6 @@ describe('generator', function () {
 
   it('should send file stats when reading top folder', function (done) {
     var dirStats = {};
-    var nb = 0;
 
     generator.readElement(__dirname + '/fixtures', function (err, stats) {
       dirStats[stats.path] = stats;
@@ -27,4 +27,22 @@ describe('generator', function () {
       done();
     });
   });
+
+  it('should work as read stream', function (done) {
+    var files = [];
+    var testStream = streamify();
+
+    testStream.on('pipe', function (source) {
+      source.on('data', function (file) {
+        files.push(file);
+      });
+      source.on('end', function () {
+        assert.equal(__dirname + '/fixtures/empty-file', files[0]);
+        done();
+      });
+    });
+
+    generator.createReadTreeStream(__dirname + '/fixtures').pipe(testStream);
+  });
+
 });
