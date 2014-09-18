@@ -17,7 +17,7 @@ describe('generator', function () {
   });
 
   it('should copy tree', function (done) {
-    generator.createFromSkeleton('ios-empty', __dirname + 'fixtures2', null, done);
+    generator.createFromSkeleton('ios-empty', __dirname + '/fixtures2', null, done);
   });
 
 });
