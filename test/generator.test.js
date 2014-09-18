@@ -4,45 +4,20 @@ var streamify = require('streamify');
 
 
 describe('generator', function () {
-  it('should send file stats', function (done) {
-    var fileStats;
-
-    generator.readElement(__dirname + '/fixtures/empty-file', function (err, stats) {
-      fileStats = stats;
-    }, function () {
-      assert.equal(0, fileStats.size);
-      assert.equal(true, fileStats.isFile());
-      done();
-    });
-  });
 
   it('should send file stats when reading top folder', function (done) {
-    var dirStats = {};
+    var dirContent = [];
 
-    generator.readElement(__dirname + '/fixtures', function (err, stats) {
-      dirStats[stats.path] = stats;
+    generator.readElement(__dirname + '/fixtures', function (filename) {
+      dirContent.push(filename);
     }, function () {
-      assert.equal(0, dirStats[__dirname + '/fixtures/empty-file'].size);
-      assert.equal(true, dirStats[__dirname + '/fixtures/empty-file'].isFile());
+      assert.equal(dirContent[0], __dirname + '/fixtures/empty-file');
       done();
     });
   });
 
-  it('should work as read stream', function (done) {
-    var files = [];
-    var testStream = streamify();
-
-    testStream.on('pipe', function (source) {
-      source.on('data', function (file) {
-        files.push(file);
-      });
-      source.on('end', function () {
-        assert.equal(__dirname + '/fixtures/empty-file', files[0]);
-        done();
-      });
-    });
-
-    generator.createReadTreeStream(__dirname + '/fixtures').pipe(testStream);
+  it('should copy tree', function (done) {
+    generator.createFromSkeleton('ios-empty', __dirname + 'fixtures2', null, done);
   });
 
 });
