@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/phantasien/xcli",
   "dependencies": {
-    "pbxproj": "0.0.3"
+    "async": "^0.9.0",
+    "lodash": "^2.4.1",
+    "pbxproj": "0.0.3",
+    "streamify": "^0.2.4"
   }
 }
