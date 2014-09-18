@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/phantasien/node-xcodeproj/issues"
   },
-  "homepage": "https://github.com/phantasien/node-xcodeproj"
+  "homepage": "https://github.com/phantasien/node-xcodeproj",
+  "dependencies": {
+    "pbxproj": "0.0.3"
+  }
 }
