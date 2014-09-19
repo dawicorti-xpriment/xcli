@@ -8,8 +8,9 @@ describe('generator', function () {
   it('should send file stats when reading top folder', function (done) {
     var dirContent = [];
 
-    generator.readElement(__dirname + '/fixtures', function (filename) {
+    generator.readElement(__dirname + '/fixtures', function (filename, next) {
       dirContent.push(filename);
+      next();
     }, function () {
       assert.equal(dirContent[0], __dirname + '/fixtures/empty-file');
       done();
