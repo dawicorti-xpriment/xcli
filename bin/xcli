@@ -6,22 +6,5 @@ var generator = require('../lib/generator');
 
 program
   .version('0.0.1')
-  .option('-t, --type <type>', 'Set project type [ios]', 'ios')
-  .option('-p, --product-name <name>', 'Set product name')
-  .option('-c, --company-identifier <identifier>', 'Set company identifier')
-  .option('-o, --organisation-name <name>', 'Set organisation name')
+  .command('create', 'xcli-create')
   .parse(process.argv);
-
-
-if (program.args.length !== 1) program.help();
-
-var project = _.pick(
-  program,
-  'productName',
-  'organisationName',
-  'companyIdentifier'
-);
-
-generator.createFromSkeleton(program.type, program.args[0], project, function () {
-  console.log('Project created in', program.args[0]);
-});

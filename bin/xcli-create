@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+var _ = require('lodash');
+var program = require('commander');
+var generator = require('../lib/generator');
+
+program
+  .version('0.0.1')
+  .usage('-t <type> -p <product> -c <company> -o <organisation> <output path>')
+  .option('-t, --type <type>', 'Set project type')
+  .option('-p, --product-name <product>', 'Set product name (Ex: "My product")')
+  .option('-c, --company-identifier <company>', 'Set company identifier (Ex: "com.example")')
+  .option('-o, --organisation-name <organisation>', 'Set organisation name (Ex: "Example inc.")')
+  .parse(process.argv);
+
+
+if (program.args.length !== 1) program.help();
+if (!program.type) program.help();
+if (!program.productName) program.help();
+if (!program.organisationName) program.help();
+if (!program.companyIdentifier) program.help();
+
+
+var project = _.pick(
+  program,
+  'productName',
+  'organisationName',
+  'companyIdentifier'
+);
+
+generator.createFromSkeleton(program.type, program.args[0], project, function () {
+  console.log('Project created in', program.args[0]);
+});
