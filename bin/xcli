@@ -5,12 +5,13 @@ var program = require('commander');
 var generator = require('../lib/generator');
 
 program
-  .usage('[OPTIONS] <output-path>')
-  .option('-t', '--type [value]', 'Project template type')
-  .option('-p', '--product-name [name]')
-  .option('-o', '--organisation-name [name]')
-  .option('-c', '--company-identifier [identifier]')
+  .version('0.0.1')
+  .option('-t, --type <type>', 'Set project type [ios]', 'ios')
+  .option('-p, --product-name <name>', 'Set product name')
+  .option('-c, --company-identifier <identifier>', 'Set company identifier')
+  .option('-o, --organisation-name <name>', 'Set organisation name')
   .parse(process.argv);
+
 
 if (program.args.length !== 1) program.help();
 
