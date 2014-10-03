@@ -1,6 +1,6 @@
 {
   "name": "xcli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "create and edit Xcode projects",
   "main": "index.js",
   "scripts": {
