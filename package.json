@@ -1,6 +1,6 @@
 {
   "name": "xcli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "create and edit Xcode projects",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,8 @@
     "mkdirp": "^0.5.0",
     "pbxproj": "0.0.3",
     "replacestream": "^0.2.0",
-    "streamify": "^0.2.4"
+    "streamify": "^0.2.4",
+    "xcode": "^0.6.7"
   },
   "devDependencies": {
     "mocha": "^1.21.4",

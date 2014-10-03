@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+var _ = require('lodash');
+var program = require('commander');
+var fs = require('fs');
+var generator = require('../lib/generator');
+var xcode = require('xcode');
+
+program
+  .version('0.0.1')
+  .usage('-p <path> <header file>')
+  .option('-p, --xcodeproj-path <path>', 'Path of the .xcodeproj folder')
+  .parse(process.argv);
+
+
+if (program.args.length !== 1) program.help();
+if (!program.xcodeprojPath) program.help();
+
+var projectPath = program.xcodeprojPath + '/project.pbxproj';
+var project = xcode.project(projectPath);
+
+// parsing is async, in a different process
+project.parse(function (err) {
+  project.addHeaderFile(program.args[0]);
+  fs.writeFileSync(projectPath, project.writeSync());
+});

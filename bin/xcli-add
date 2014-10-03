@@ -6,6 +6,6 @@ var generator = require('../lib/generator');
 
 program
   .version('0.0.1')
-  .command('create', 'xcli-create')
-  .command('add', 'xcli-add')
+  .command('header', 'xcli-add-header')
+  .command('lib', 'xcli-add-lib')
   .parse(process.argv);
